@@ -1,9 +1,20 @@
-Html<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Wanderlust Adventures</title>
+
+<!-- This is the JavaScript code-->
+<script type="text/javascript" defer>
+    document.getElementById("exploreBtn").addEventListener("click", () => {
+    const message = document.getElementById("welcomeMessage");
+    message.textContent = "Welcome traveler! Your adventure begins now.";
+    message.style.display = "block";
+});
+</script>
+
+<!-- This is the CSS code-->
 <style>
     body {
         margin: 0;
@@ -80,6 +91,9 @@ Html<!DOCTYPE html>
     }
 </style>
 </head>
+
+<!-- This is the HTML code-->
+
 <body>
 
 <header>
@@ -96,6 +110,12 @@ Html<!DOCTYPE html>
     <h1>Explore the World</h1>
     <p>Discover breathtaking destinations, vibrant cultures, and unforgettable experiences.</p>
 </section>
+
+<section style="text-align:center; padding:2rem;">
+    <button id="exploreBtn">Start Exploring</button>
+    <p id="welcomeMessage" style="display:none; font-size:1.2rem; margin-top:1rem;"></p>
+</section>
+
 
 <section id="destinations" class="destinations">
     <div class="card">
@@ -124,4 +144,7 @@ Html<!DOCTYPE html>
     </div>
     <div class="card">
         <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470" alt="New York">
+</section>
 
+</body>
+</html>
