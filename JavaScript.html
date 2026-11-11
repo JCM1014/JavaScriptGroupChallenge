@@ -6,9 +6,11 @@
 <title>Wanderlust Adventures</title>
 
 <!-- This is the JavaScript code-->
-<script type="text/javascript" defer>
-    document.getElementById("exploreBtn").addEventListener("click", () => {
+<script>
+    document.addEventListner("DOMContentLoaded", function() { 
+    document.getElementById("exploreBtn").addEventListener("click", function () {
     const message = document.getElementById("welcomeMessage");
+        
     message.textContent = "Welcome traveler! Your adventure begins now.";
     message.style.display = "block";
 });
