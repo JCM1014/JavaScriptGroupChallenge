@@ -3,17 +3,17 @@ JavaScript Challenge
 
 Your website should include the following:
 
-- A website title or logo. [Done]
-- A navigation bar with at least three sections. [Done]
-- A welcome section with a heading, description, and background image. [Done]
-- At least four travel destination cards. [Done]
-- Each destination card must include an image, destination name, and short description. [Done]
-- Consistent colors, fonts, spacing, and layout. [Done]
+-  [Done] A website title or logo. [Done]
+-  [Done] A navigation bar with at least three sections. [Done]
+-  [Done] A welcome section with a heading, description, and background image. [Done]
+-  [Done] At least four travel destination cards. [Done]
+-  [Done] Each destination card must include an image, destination name, and short description. [Done]
+-  [Done] Consistent colors, fonts, spacing, and layout. [Done]
 
 
 Javascript Requirements:
 
-- Create a button labeled "Start Exploring." [Done]
+-  [Done] Create a button labeled "Start Exploring." [Done]
 - When clicked, display a welcome message
 - The message should appear directly on the webpage rather than only in an alert box.
 - Each destination must have a "Learn More" button.
