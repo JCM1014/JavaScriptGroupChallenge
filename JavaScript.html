@@ -1,153 +1,888 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Wanderlust Adventures</title>
 
-<!-- This is the JavaScript code-->
-<script>
-    document.addEventListener("DOMContentLoaded", function() { 
-        document.getElementById("exploreBtn").addEventListener("click", function () {
-            const message = document.getElementById("welcomeMessage");
-        
-        message.textContent = "Welcome traveler! Your adventure begins now.";
-        message.style.display = "block";
-        }); 
-});
+<!-- This is the JavaScript code -->
+<script type="text/javascript">
+
+// START EXPLORING BUTTON
+function startExploring() {
+
+    // Display the welcome message
+    let message = document.getElementById("welcomeMessage");
+
+    message.textContent =
+        "🌎 Welcome traveler! Your adventure begins now!";
+
+    message.style.display = "block";
+
+    // Wait 2 seconds before scrolling
+    setTimeout(function() {
+
+        let destination = document.getElementById("destinations");
+
+        let start = window.scrollY;
+        let end = destination.getBoundingClientRect().top + window.scrollY;
+        let distance = end - start;
+
+        // Scroll for 3 seconds
+        let duration = 3000;
+        let startTime = null;
+
+        function slowScroll(currentTime) {
+
+            if (startTime === null) {
+                startTime = currentTime;
+            }
+
+            let elapsed = currentTime - startTime;
+            let progress = Math.min(elapsed / duration, 1);
+
+            // Smooth scrolling animation
+            let smooth = progress * progress * (3 - 2 * progress);
+
+            window.scrollTo(0, start + distance * smooth);
+
+            if (progress < 1) {
+                requestAnimationFrame(slowScroll);
+            }
+
+        }
+
+        requestAnimationFrame(slowScroll);
+
+    }, 2000);
+
+}
+
+
+// LEARN MORE BUTTONS
+function showAlert(destination) {
+
+    let information = "";
+
+    if (destination == "Maldives") {
+
+        information =
+            "🏝️ Maldives: The Maldives is famous for its beautiful beaches, clear blue water, and tropical resorts. Visitors can enjoy snorkeling, swimming, and relaxing by the ocean.";
+
+    }
+    else if (destination == "Paris") {
+
+        information =
+            "🗼 Paris: Paris is the capital of France. It is famous for the Eiffel Tower, the Louvre Museum, delicious food, and beautiful architecture.";
+
+    }
+    else if (destination == "Tokyo") {
+
+        information =
+            "🌸 Tokyo: Tokyo is the capital of Japan. It is famous for technology, amazing food, shopping, anime, and traditional Japanese culture.";
+
+    }
+    else if (destination == "New York") {
+
+        information =
+            "🗽 New York: New York City is famous for Times Square, Central Park, the Statue of Liberty, Broadway, and its incredible skyline.";
+
+    }
+
+    let infoBox = document.getElementById("destinationInfo");
+
+    infoBox.textContent = information;
+    infoBox.style.display = "block";
+
+    infoBox.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+
+}
+
+
+// BACKGROUND COLOR CHANGER
+function changeBackground() {
+
+    let colors = [
+        "#f4f4f4",
+        "#e0f7fa",
+        "#fff3e0",
+        "#e8f5e9",
+        "#f3e5f5",
+        "#fce4ec"
+    ];
+
+    let randomNumber = Math.floor(Math.random() * colors.length);
+
+    document.body.style.backgroundColor = colors[randomNumber];
+
+}
+
+
+// CHOOSE YOUR OWN BACKGROUND COLOR
+function chooseColor(color) {
+
+    document.body.style.backgroundColor = color;
+
+}
+
+
+// TRAVEL BUDGET CALCULATOR
+function calculateBudget() {
+
+    let cost = Number(document.getElementById("travelCost").value);
+
+    let travelers = Number(document.getElementById("travelers").value);
+
+    let total = cost * travelers;
+
+    if (cost <= 0 || travelers <= 0 || !Number.isInteger(travelers)) {
+
+        document.getElementById("budgetResult").textContent =
+            "Please enter a valid cost and number of travelers.";
+
+    }
+    else {
+
+        document.getElementById("budgetResult").textContent =
+            "Your estimated total travel cost is $" + total.toFixed(2);
+
+    }
+
+}
+
+
+// SURPRISE ME BUTTON
+function surpriseMe() {
+
+    let destinations = [
+        "Maldives",
+        "Paris",
+        "Tokyo",
+        "New York"
+    ];
+
+    let randomNumber = Math.floor(Math.random() * destinations.length);
+
+    let selectedDestination = destinations[randomNumber];
+
+    document.getElementById("surpriseResult").textContent =
+        "✈ Your next adventure should be: " + selectedDestination + "!";
+
+}
+
 </script>
 
-<!-- This is the CSS code-->
+
+<!-- This is the CSS code -->
 <style>
-    body {
-        margin: 0;
-        font-family: 'Segoe UI', sans-serif;
-        background-color: #f4f4f4;
-        color: #333;
-    }
-    header {
-        background: #2c3e50;
-        color: white;
-        padding: 1rem;
-        text-align: center;
-    }
-    nav {
-        display: flex;
-        justify-content: center;
-        background: #34495e;
-    }
-    nav a {
-        color: white;
-        padding: 1rem;
-        text-decoration: none;
-    }
-    nav a:hover {
-        background: #1abc9c;
-    }
-    .welcome {
-        background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') center/cover no-repeat;
-        color: white;
-        padding: 5rem 2rem;
-        text-align: center;
-    }
+
+/* GENERAL WEBSITE STYLING */
+
+html {
+    scroll-behavior: auto;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    transition: background-color 0.5s;
+}
+
+
+/* HEADER */
+
+header {
+    background: #2c3e50;
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+
+/* NAVIGATION BAR */
+
+nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    background: #34495e;
+}
+
+nav a {
+    color: white;
+    padding: 1rem;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    background: #1abc9c;
+}
+
+
+/* WELCOME SECTION */
+
+.welcome {
+    background:
+        linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.45)),
+        url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e')
+        center/cover no-repeat;
+
+    color: white;
+    padding: 7rem 2rem;
+    text-align: center;
+}
+
+.welcome h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+}
+
+.welcome p {
+    font-size: 1.2rem;
+    max-width: 650px;
+    margin: auto;
+    line-height: 1.7;
+}
+
+
+/* BUTTONS */
+
+button {
+    background: #1abc9c;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background 0.3s, transform 0.3s;
+}
+
+button:hover {
+    background: #16a085;
+    transform: translateY(-3px);
+}
+
+
+/* START EXPLORING SECTION */
+
+.explore-section {
+    text-align: center;
+    padding: 3rem 2rem;
+}
+
+#exploreBtn {
+    font-size: 1.3rem;
+    padding: 1.2rem 2.5rem;
+    border-radius: 10px;
+}
+
+#welcomeMessage {
+    display: none;
+    font-size: 1.2rem;
+    margin: 1.5rem auto 0;
+    color: #167b67;
+    font-weight: bold;
+    max-width: 650px;
+    line-height: 1.6;
+}
+
+
+/* SECTION TITLES */
+
+.section-title {
+    text-align: center;
+    font-size: 2.2rem;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.section-description {
+    text-align: center;
+    color: #666;
+    margin-bottom: 2rem;
+    padding: 0 1rem;
+}
+
+
+/* DESTINATION CARDS */
+
+.destinations {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem;
+    max-width: 1300px;
+    margin: auto;
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.04);
+}
+
+.card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 1.5rem;
+}
+
+.card-content h3 {
+    margin-top: 0;
+    color: #2c3e50;
+    font-size: 1.5rem;
+}
+
+.card-content p {
+    color: #666;
+    line-height: 1.6;
+    min-height: 55px;
+}
+
+
+/* DESTINATION INFORMATION */
+
+#destinationInfo {
+    display: none;
+    background: white;
+    max-width: 800px;
+    margin: 1rem auto 3rem;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: center;
+    line-height: 1.8;
+    font-size: 1.1rem;
+    box-sizing: border-box;
+}
+
+
+/* TRAVEL PLANNER */
+
+.planner {
+    background: #2c3e50;
+    color: white;
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.planner h2 {
+    font-size: 2.5rem;
+    margin-top: 0;
+}
+
+.planner > p {
+    color: #ddd;
+}
+
+.planner-box {
+    background: white;
+    color: #333;
+    max-width: 550px;
+    margin: 2rem auto;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.planner-box h3 {
+    color: #2c3e50;
+    font-size: 1.5rem;
+}
+
+.planner-box p {
+    color: #666;
+    line-height: 1.6;
+}
+
+
+/* INPUT FIELDS */
+
+input {
+    padding: 0.8rem;
+    margin: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    width: 190px;
+    max-width: 80%;
+    box-sizing: border-box;
+}
+
+#budgetResult,
+#surpriseResult {
+    font-size: 1.2rem;
+    color: #16a085;
+    font-weight: bold;
+    margin-top: 1.5rem;
+}
+
+
+/* BACKGROUND COLOR CHANGER */
+
+.color-section {
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.color-section p {
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+.color-section h3 {
+    margin-top: 30px;
+    color: #2c3e50;
+    font-size: 1.2rem;
+}
+
+.color-options {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.color-choice {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    cursor: pointer;
+    padding: 0;
+    transition: transform 0.3s;
+}
+
+.color-choice:hover {
+    transform: scale(1.15);
+}
+
+
+/* CONTACT SECTION */
+
+.contact {
+    background: #34495e;
+    color: white;
+    text-align: center;
+    padding: 3rem 2rem;
+}
+
+.contact h2 {
+    font-size: 2rem;
+}
+
+.contact p {
+    color: #ddd;
+}
+
+
+/* FOOTER */
+
+footer {
+    background: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.9rem;
+}
+
+
+/* MOBILE SCREEN ADJUSTMENTS */
+
+@media (max-width: 600px) {
+
     .welcome h1 {
-        font-size: 3rem;
-        margin-bottom: 1rem;
+        font-size: 2.5rem;
     }
-    .destinations {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 1.5rem;
-        padding: 2rem;
+
+    .welcome {
+        padding: 5rem 1.5rem;
     }
-    .card {
-        background: white;
-        border-radius: 8px;
-        overflow: hidden;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        transition: transform 0.3s;
+
+    .planner {
+        padding: 3rem 1rem;
     }
-    .card:hover {
-        transform: scale(1.05);
+
+    .planner-box {
+        padding: 1.5rem;
     }
-    .card img {
-        width: 100%;
-        height: 180px;
-        object-fit: cover;
+
+    .section-title {
+        font-size: 1.8rem;
     }
-    .card-content {
-        padding: 1rem;
+
+    #exploreBtn {
+        font-size: 1.1rem;
     }
-    .card-content h3 {
-        margin-top: 0;
+
+    #destinationInfo {
+        margin: 1rem 1rem 3rem;
     }
-    button {
-        background: #1abc9c;
-        color: white;
-        border: none;
-        padding: 0.5rem 1rem;
-        cursor: pointer;
-        border-radius: 4px;
-    }
-    button:hover {
-        background: #16a085;
-    }
+
+}
+
 </style>
 </head>
 
-<!-- This is the HTML code-->
 
+<!-- This is the HTML code -->
 <body>
 
+<!-- WEBSITE HEADER -->
 <header>
-    <h1>Wanderlust Adventures</h1>
+    <h1>🌎 Wanderlust Adventures</h1>
 </header>
 
+
+<!-- NAVIGATION BAR -->
 <nav>
     <a href="#welcome">Home</a>
     <a href="#destinations">Destinations</a>
+    <a href="#planner">Travel Planner</a>
     <a href="#contact">Contact</a>
 </nav>
 
+
+<!-- WELCOME SECTION -->
 <section id="welcome" class="welcome">
+
     <h1>Explore the World</h1>
-    <p>Discover breathtaking destinations, vibrant cultures, and unforgettable experiences.</p>
+
+    <p>
+        Discover breathtaking destinations, vibrant cultures,
+        and unforgettable experiences. Your next adventure
+        starts right here!
+    </p>
+
 </section>
 
-<section style="text-align:center; padding:2rem;">
-    <button id="exploreBtn">Start Exploring</button>
-    <p id="welcomeMessage" style="display:none; font-size:1.2rem; margin-top:1rem;"></p>
+
+<!-- START EXPLORING BUTTON -->
+<section class="explore-section">
+
+    <button id="exploreBtn" onclick="startExploring()">
+        Start Exploring ✈
+    </button>
+
+    <p id="welcomeMessage" role="status"></p>
+
 </section>
 
 
+<!-- DESTINATIONS HEADING -->
+<h2 class="section-title">
+    Discover Amazing Destinations
+</h2>
+
+<p class="section-description">
+    Explore some of the most beautiful places around the world.
+</p>
+
+
+<!-- DESTINATION CARDS -->
 <section id="destinations" class="destinations">
+
+    <!-- MALDIVES -->
     <div class="card">
-        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" alt="Maldives">
+
+        <img
+            src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e"
+            alt="Maldives beach"
+        >
+
         <div class="card-content">
-            <h3>Maldives</h3>
-            <p>Crystal-clear waters and serene beaches await you.</p>
-            <button onclick="showAlert('Maldives')">Learn More</button>
+
+            <h3>🏝️ Maldives</h3>
+
+            <p>
+                Crystal-clear waters and serene beaches await you.
+            </p>
+
+            <button onclick="showAlert('Maldives')">
+                Learn More
+            </button>
+
         </div>
+
     </div>
+
+
+    <!-- PARIS -->
     <div class="card">
-        <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1" alt="Paris">
+
+        <img
+            src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34"
+            alt="Eiffel Tower in Paris"
+        >
+
         <div class="card-content">
-            <h3>Paris</h3>
-            <p>The city of love, art, and timeless beauty.</p>
-            <button onclick="showAlert('Paris')">Learn More</button>
+
+            <h3>🗼 Paris</h3>
+
+            <p>
+                The city of love, art, and timeless beauty.
+            </p>
+
+            <button onclick="showAlert('Paris')">
+                Learn More
+            </button>
+
         </div>
+
     </div>
+
+
+    <!-- TOKYO -->
     <div class="card">
-        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb" alt="Tokyo">
+
+        <img
+            src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf"
+            alt="Tokyo skyline"
+        >
+
         <div class="card-content">
-            <h3>Tokyo</h3>
-            <p>A vibrant blend of tradition and modernity.</p>
-            <button onclick="showAlert('Tokyo')">Learn More</button>
+
+            <h3>🌸 Tokyo</h3>
+
+            <p>
+                A vibrant blend of tradition and modernity.
+            </p>
+
+            <button onclick="showAlert('Tokyo')">
+                Learn More
+            </button>
+
         </div>
+
     </div>
+
+
+    <!-- NEW YORK -->
     <div class="card">
-        <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470" alt="New York">
+
+        <img
+            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab"
+            alt="New York City buildings"
+        >
+
+        <div class="card-content">
+
+            <h3>🗽 New York</h3>
+
+            <p>
+                Experience bright lights, famous landmarks,
+                and the city that never sleeps.
+            </p>
+
+            <button onclick="showAlert('New York')">
+                Learn More
+            </button>
+
+        </div>
+
+    </div>
+
 </section>
+
+
+<!-- ADDITIONAL DESTINATION INFORMATION -->
+<div id="destinationInfo" role="status"></div>
+
+
+<!-- TRAVEL PLANNER -->
+<section id="planner" class="planner">
+
+    <h2>✈ Plan Your Next Adventure</h2>
+
+    <p>
+        Calculate your travel budget or discover
+        a surprise destination!
+    </p>
+
+
+    <!-- BUDGET CALCULATOR -->
+    <div class="planner-box">
+
+        <h3>💰 Travel Budget Calculator</h3>
+
+        <p>
+            Enter your estimated cost per person
+            and the number of travelers.
+        </p>
+
+        <input
+            type="number"
+            id="travelCost"
+            placeholder="Cost per person ($)"
+            min="0"
+            step="0.01"
+        >
+
+        <input
+            type="number"
+            id="travelers"
+            placeholder="Number of travelers"
+            min="1"
+            step="1"
+        >
+
+        <br><br>
+
+        <button onclick="calculateBudget()">
+            Calculate Total
+        </button>
+
+        <p id="budgetResult" role="status"></p>
+
+    </div>
+
+
+    <!-- SURPRISE ME BUTTON -->
+    <div class="planner-box">
+
+        <h3>🎲 Can't Decide Where to Go?</h3>
+
+        <p>
+            Click the button below and let us
+            choose your next destination!
+        </p>
+
+        <button onclick="surpriseMe()">
+            Surprise Me!
+        </button>
+
+        <p id="surpriseResult" role="status"></p>
+
+    </div>
+
+</section>
+
+
+<!-- BACKGROUND COLOR CHANGER -->
+<section class="color-section">
+
+    <h2 class="section-title">
+        🎨 Customize Your Experience
+    </h2>
+
+    <p>
+        Choose your favorite background color,
+        or click the button for a random surprise!
+    </p>
+
+    <!-- RANDOM COLOR BUTTON -->
+    <button onclick="changeBackground()">
+        🎲 Random Background Color
+    </button>
+
+    <h3>Or choose your own color:</h3>
+
+    <!-- COLOR OPTIONS -->
+    <div class="color-options">
+
+        <!-- LIGHT BLUE -->
+        <button
+            class="color-choice"
+            style="background-color: #e0f7fa;"
+            onclick="chooseColor('#e0f7fa')"
+            aria-label="Light Blue">
+        </button>
+
+        <!-- MINT GREEN -->
+        <button
+            class="color-choice"
+            style="background-color: #e8f5e9;"
+            onclick="chooseColor('#e8f5e9')"
+            aria-label="Mint Green">
+        </button>
+
+        <!-- LAVENDER -->
+        <button
+            class="color-choice"
+            style="background-color: #f3e5f5;"
+            onclick="chooseColor('#f3e5f5')"
+            aria-label="Lavender">
+        </button>
+
+        <!-- PEACH -->
+        <button
+            class="color-choice"
+            style="background-color: #fff3e0;"
+            onclick="chooseColor('#fff3e0')"
+            aria-label="Peach">
+        </button>
+
+        <!-- PINK -->
+        <button
+            class="color-choice"
+            style="background-color: #fce4ec;"
+            onclick="chooseColor('#fce4ec')"
+            aria-label="Pink">
+        </button>
+
+        <!-- ORIGINAL GRAY -->
+        <button
+            class="color-choice"
+            style="background-color: #f4f4f4;"
+            onclick="chooseColor('#f4f4f4')"
+            aria-label="Original Gray">
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- CONTACT SECTION -->
+<section id="contact" class="contact">
+
+    <h2>Ready for Your Next Adventure?</h2>
+
+    <p>
+        The world is full of amazing places waiting to be explored.
+    </p>
+
+    <p>
+        Start planning your dream vacation with Wanderlust Adventures!
+    </p>
+
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+
+    <p>
+        © 2026 Wanderlust Adventures | Explore. Dream. Discover.
+    </p>
+
+</footer>
 
 </body>
 </html>
