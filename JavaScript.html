@@ -7,12 +7,13 @@
 
 <!-- This is the JavaScript code-->
 <script>
-    document.addEventListner("DOMContentLoaded", function() { 
-    document.getElementById("exploreBtn").addEventListener("click", function () {
-    const message = document.getElementById("welcomeMessage");
+    document.addEventListener("DOMContentLoaded", function() { 
+        document.getElementById("exploreBtn").addEventListener("click", function () {
+            const message = document.getElementById("welcomeMessage");
         
-    message.textContent = "Welcome traveler! Your adventure begins now.";
-    message.style.display = "block";
+        message.textContent = "Welcome traveler! Your adventure begins now.";
+        message.style.display = "block";
+        }); 
 });
 </script>
 
