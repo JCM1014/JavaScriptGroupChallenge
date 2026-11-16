@@ -14,16 +14,16 @@ Your website should include the following:
 Javascript Requirements:
 
 -  [Done] Create a button labeled "Start Exploring." [Done]
-- When clicked, display a welcome message
-- The message should appear directly on the webpage rather than only in an alert box.
-- Each destination must have a "Learn More" button.
-- When clicked, display additional information about that destination.
-- Use JavaScript to dynamically update the webpage.
-- Add a button that allows visitors to change the website's background color.
-- You may provide multiple color choices or randomly generate a new background color.
-- Create a simple travel budget calculator.
-- Allow visitors to enter an estimated travel cost and the number of travelers.
-- Use JavaScript to calculate and display the total cost.
-- Add a button labeled "Surprise Me!"
-- When clicked, JavaScript should randomly select one of the four destinations and display its name.
+- [Done] When clicked, display a welcome message
+- [Done] The message should appear directly on the webpage rather than only in an alert box.
+- [Done] Each destination must have a "Learn More" button.
+- [Done] When clicked, display additional information about that destination.
+- [Done] Use JavaScript to dynamically update the webpage.
+- [Done] Add a button that allows visitors to change the website's background color.
+- [Done] You may provide multiple color choices or randomly generate a new background color.
+- [Done] Create a simple travel budget calculator.
+- [Done] Allow visitors to enter an estimated travel cost and the number of travelers.
+- [Done] Use JavaScript to calculate and display the total cost.
+- [Done] Add a button labeled "Surprise Me!"
+- [Done] When clicked, JavaScript should randomly select one of the four destinations and display its name.
 
